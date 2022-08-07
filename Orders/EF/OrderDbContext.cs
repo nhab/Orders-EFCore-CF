@@ -17,5 +17,12 @@ namespace Orders.EF
         {
             optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-CLSBCU4\N;Initial Catalog=StoreDB;persist security info=True; Integrated Security=SSPI;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>()
+                .Property(b => b.OrderDate)
+                .HasDefaultValueSql("CONVERT(date, GETDATE())");
+        }
     }
 }
